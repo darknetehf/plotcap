@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "plotcap"
+version = "0.1.0"
+description = "plotcap for testing"
+authors = ["Darknet ehf <info@darknet.com>"]
+maintainers = ["Darknet ehf <info@darknet.com>"]
+homepage = "https://github.com/darknetehf/plotcap"
+repository = "https://github.com/darknetehf/plotcap"
+keywords = ["packaging", "poetry"]
+classifiers = [
+    "Topic :: System :: Networking",
+    "Topic :: System :: Networking :: Monitoring",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Visualization"
+]
+license = "MIT"
+readme = "README.rst"
+packages = [{include = "plotcap", from = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pyyaml = "^6.0.1"
+netaddr = "^0.8.0"
+scapy = "^2.5.0"
+pyvis = "^0.3.2"
+
+[tool.poetry.scripts]
+plotcap = "plotcap.cli:main"
+
+[tool.poetry.group.dev.dependencies]
+docutils = "^0.20.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

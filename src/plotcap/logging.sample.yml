@@ -1,0 +1,28 @@
+version: 1
+disable_existing_loggers: no
+formatters:
+    simple:
+        format: "%(asctime)s  %(levelname)-8s  %(message)s"
+    verbose:
+        format: "%(asctime)s - %(name)s - %(levelname)s - %(funcName)s:%(lineno)d - %(message)s"
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        level: INFO
+        formatter: simple
+        stream: ext://sys.stdout
+    file:
+        class: logging.FileHandler
+        level: DEBUG
+        filename: plotcap.log
+        formatter: verbose
+loggers:
+    root:
+        level: DEBUG
+        handlers: [console]
+    '':  # leave blank to match __name__
+        level: DEBUG
+        handlers: [console,file]
+        propagate: yes
+        qualname: app
