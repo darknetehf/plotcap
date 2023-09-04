@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "plotcap"
-version = "0.1.1"
+version = "0.1.2"
 description = "PlotCap - a simple network visualization tool"
 authors = ["Darknet ehf <info@darknet.com>"]
 maintainers = ["Darknet ehf <info@darknet.com>"]
