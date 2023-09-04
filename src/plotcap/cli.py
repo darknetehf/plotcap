@@ -8,6 +8,7 @@ from pathlib import Path
 
 import yaml
 
+from plotcap import __version__
 from plotcap.plotting import plot_layer2, plot_layer3
 
 # constants
@@ -84,6 +85,13 @@ def parse_arguments():
         help="visualize at layer 3 (IP addresses)",
     )
 
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version="%(prog)s {version}".format(version=__version__),
+    )
+
     args = parser.parse_args()
 
     return args
@@ -91,13 +99,18 @@ def parse_arguments():
 
 def main():
     try:
-        # get current application dir
-        current_dir = os.path.dirname(os.path.realpath(__file__))
-        logger = setup_logging(Path(current_dir) / LOGGING_CONFIG_FILE)
-        logger.info("Application starting")
+        # do not set up logger yet in case CLI option -v/--version is set
+        logger = logging.getLogger(__name__)
 
         # check command line arguments
         args = parse_arguments()
+
+        # get current application dir and set up logger from YAML config
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+
+        logger = setup_logging(Path(current_dir) / LOGGING_CONFIG_FILE)
+
+        logger.info("Application starting")
 
         if args.layer == "l2":
             plot_layer2(
