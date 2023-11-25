@@ -2,8 +2,8 @@
 name = "plotcap"
 version = "0.1.2"
 description = "PlotCap - a simple network visualization tool"
-authors = ["Darknet ehf <info@darknet.com>"]
-maintainers = ["Darknet ehf <info@darknet.com>"]
+authors = ["Darknet ehf <info@labs.darknet.com>"]
+maintainers = ["Darknet ehf <info@labs.darknet.com>"]
 homepage = "https://github.com/darknetehf/plotcap"
 repository = "https://github.com/darknetehf/plotcap"
 keywords = ["packaging", "poetry"]
