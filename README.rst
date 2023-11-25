@@ -7,9 +7,9 @@ PlotCap - a simple network visualization tool.
 Introduction
 ============
 
-PlotCap is a simple command line tool written in Python and based on PyVis, that parses network capture files to render
-PlotCap was designed for red team engagements, with the aim of quickly mapping out relationships between devices ("nodes") in a network.
+PlotCap is a simple command line tool written in Python and based on PyVis, that parses network capture files (produced by tools such as tcpdump or Wireshark) to render a graph of the network topology in a web page.
 
+PlotCap was designed for red team engagements, with the aim of quickly mapping out relationships between devices ("nodes") in a network.
 Target groups are: network administrators, penetration testers and curious people.
 
 Visualization can be performed at layer 2 (MAC addresses) and layer 3 (IP addresses).
@@ -20,7 +20,7 @@ Usage
 
 .. code-block:: bash
 
-    plotcap  -f /capture.cap
+    plotcap  -f capture.cap
 
 This is equivalent to:
 
