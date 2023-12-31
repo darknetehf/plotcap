@@ -4,6 +4,8 @@ PlotCap
 
 PlotCap - a simple network visualization tool.
 
+.. contents:: Table of Contents
+
 Introduction
 ============
 
