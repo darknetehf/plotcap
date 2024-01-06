@@ -20,15 +20,19 @@ packages = [{include = "plotcap", from = "src"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 pyyaml = "^6.0.1"
-netaddr = "^0.8.0"
+netaddr = "^0.10.1"
 scapy = "^2.5.0"
 pyvis = "^0.3.2"
 
 [tool.poetry.scripts]
 plotcap = "plotcap.cli:main"
 
+[tool.poetry.group.dev]
+optional = true
+
 [tool.poetry.group.dev.dependencies]
 docutils = "^0.20.1"
+bump2version = "^1.0.1"
 
 [build-system]
 requires = ["poetry-core"]
