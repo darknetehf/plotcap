@@ -80,6 +80,7 @@ def plot_network(
             color="#97c2fc",
             title=node,
             borderWidth=2,
+            physics=False,  # freeze node position after manual rearrangement
         )
 
     # add edges between nodes, both ways
