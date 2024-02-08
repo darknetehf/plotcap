@@ -52,6 +52,19 @@ Show IP addresses:
 
     plotcap  -f capture.cap --layer3
 
+API
+===
+
+A convenience API is available if you just want to parse the .pcap file and reuse the results, but don't want a graphical representation.
+
+.. code-block:: python
+
+   from plotcap.api import parse_file
+
+   pcap_file = "/tmp/test.pcap"
+   conversations = parse_file(pcap_file=pcap_file, layer=2)
+   for conversation, packet_count in conversations.items():
+      print(f"src: {conversation.src} - dst: {conversation.dst} - packets: {packet_count}")
 
 Limitations
 ===========
