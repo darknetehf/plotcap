@@ -23,6 +23,8 @@ pyyaml = "^6.0.1"
 netaddr = "^0.10.1"
 scapy = "^2.5.0"
 pyvis = "^0.3.2"
+netgraph = "^4.13.2"
+networkx = "^3.3"
 
 [tool.poetry.scripts]
 plotcap = "plotcap.cli:main"
