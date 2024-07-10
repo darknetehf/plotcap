@@ -7,7 +7,7 @@ from scapy.utils import PcapReader
 logger = logging.getLogger(__name__)
 
 
-def parse_file(pcap_file: str, layer: int = 2):
+def parse_file(pcap_file: str, layer: int = 2) -> Counter:
     """
     Build a summary of conversations:
     source MAC/IP address, destination/IP MAC address, number of packets
@@ -26,7 +26,8 @@ def parse_file(pcap_file: str, layer: int = 2):
             bytes_read += packet.wirelen
             if ip_layer in packet:
                 logger.debug(
-                    f"Packet {packet_counter} - Source: {packet[ip_layer].src}, Destination: {packet[ip_layer].dst} - Frame length: {packet[ip_layer].wirelen}"
+                    f"Packet {packet_counter} - Source: {packet[ip_layer].src}, Destination: {
+                        packet[ip_layer].dst} - Frame length: {packet[ip_layer].wirelen}"
                 )
                 # count conversations as tuples! (trailing comma is required)
                 if (
