@@ -52,6 +52,8 @@ Show IP addresses:
 
     plotcap  -f capture.cap --layer3
 
+To increase **verbosity** add ``-v`` or ``-vv`` for debugging.
+
 API
 ===
 
