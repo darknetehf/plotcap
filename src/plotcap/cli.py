@@ -12,26 +12,26 @@ from plotcap import __version__
 from plotcap.plotting import plot_layer2, plot_layer3
 
 # constants
-LOGGING_CONFIG_FILE = "logging.yml"
 resolve_oui = True  # attempt to get manufacturer from MAC address
 
 
-def setup_logging(yaml_file):
+def setup_logging(logging_level):
     logger = logging.getLogger(__name__)
 
-    if not Path.exists(yaml_file):
-        logging.basicConfig(
-            stream=sys.stdout,
-            level=logging.INFO,
-            format="%(asctime)s - %(levelname)s - %(message)s",
-        )
-        logging.warning(
-            f"File {yaml_file} not found, using default configuration for logging"
-        )
-    else:
-        with open(yaml_file, "r") as f:
-            yaml_config = yaml.safe_load(f.read())
-            logging.config.dictConfig(yaml_config)
+    # default logging level is WARNING unless specified otherwise
+    # cap level to 2
+    # 0 = WARNING, 1 = INFO, 2 = DEBUG
+    levels = [logging.WARNING, logging.INFO, logging.DEBUG]
+    level = levels[min(logging_level, 2)]
+
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=level,
+        format="%(asctime)s - %(levelname)s - %(message)s",
+    )
+    logging.debug(
+        f"Logging level set to: {logging.getLevelName(logging.getLogger().getEffectiveLevel())}"
+    )
 
     return logger
 
@@ -86,10 +86,13 @@ def parse_arguments():
     )
 
     parser.add_argument(
-        "-v",
         "--version",
         action="version",
         version="%(prog)s {version}".format(version=__version__),
+    )
+
+    parser.add_argument(
+        "-v", "--verbose", dest="logging_level", action="count", default=0
     )
 
     args = parser.parse_args()
@@ -105,10 +108,7 @@ def main():
         # check command line arguments
         args = parse_arguments()
 
-        # get current application dir and set up logger from YAML config
-        current_dir = os.path.dirname(os.path.realpath(__file__))
-
-        logger = setup_logging(Path(current_dir) / LOGGING_CONFIG_FILE)
+        logger = setup_logging(args.logging_level)
 
         logger.info("Application starting")
 
