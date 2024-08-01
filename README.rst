@@ -21,6 +21,23 @@ Target groups are: network administrators, penetration testers and curious peopl
 Visualization can be performed at layer 2 (MAC addresses) and layer 3 (IP addresses).
 Layer 2 is the default. The tool attempts to resolve MAC addresses unless directed otherwise.
 
+Install
+=======
+
+You can install plotcap on your system by using pipx:
+
+.. code-block:: bash
+
+   pipx install git+https://github.com/darknetehf/plotcap.git
+
+And optionally:
+
+.. code-block:: bash
+
+   pipx ensurepath
+
+This will add '~/.local/bin' to your PATH environment variable.
+
 Usage
 =====
 
