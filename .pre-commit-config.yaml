@@ -1,7 +1,7 @@
 repos:
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-case-conflict
       - id: fix-byte-order-marker
@@ -16,17 +16,17 @@ repos:
       - id: detect-private-key
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.18.4
+    rev: v8.24.2
     hooks:
       - id: gitleaks
 
   - repo: https://github.com/hhatto/autopep8
-    rev: "v2.3.1"
+    rev: "v2.3.2"
     hooks:
       - id: autopep8
 
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 25.1.0
     hooks:
       - id: black
         description: The uncompromising Python code formatter
@@ -35,12 +35,12 @@ repos:
         args: ["--line-length=79"]
 
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 6.0.1
     hooks:
       - id: isort
 
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.9
+    rev: 1.8.3
     hooks:
       - id: bandit
         name: bandit
