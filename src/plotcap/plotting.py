@@ -10,6 +10,9 @@ from plotcap.mac_address import get_manufacturer_name
 
 logger = logging.getLogger(__name__)
 
+NODE_MIN_SIZE = 10
+NODE_MAX_SIZE = 50
+
 
 def plot_network(pcap_file: str, layer: int = 2, resolve_oui: bool = True):
     """
@@ -19,7 +22,7 @@ def plot_network(pcap_file: str, layer: int = 2, resolve_oui: bool = True):
 
     conversations = parse_file(pcap_file=pcap_file, layer=layer)
     packet_counter = sum(conversations.values())
-    logger.debug(f"NUmber of packets: {packet_counter}")
+    logger.debug(f"Number of packets: {packet_counter}")
 
     nt = Network(height="750px", width="100%", directed=True, filter_menu=True)
 
@@ -47,6 +50,7 @@ def plot_network(pcap_file: str, layer: int = 2, resolve_oui: bool = True):
         nt.add_node(
             node,
             label=node_label,
+            packets=0,  # this property will be updated in a second stage
             shape="dot",
             color="#97c2fc",
             title=node,
@@ -56,27 +60,26 @@ def plot_network(pcap_file: str, layer: int = 2, resolve_oui: bool = True):
 
     # add edges between nodes, both ways
     for conversation, packet_count in conversations.items():
-        packet_ratio = (packet_count / len(conversations)) * 100
         logger.debug(
-            f"{conversation.src} to {conversation.dst}  - packet_count: {packet_count} - ratio = {packet_ratio}"
+            f"{conversation.src} to {conversation.dst}  - packet_count: {packet_count}"
         )
 
         nt.add_edge(
             source=conversation.src,
             to=conversation.dst,
-            title=f"{packet_count} packets"
-            # weight=edge_width, value=edge_width
+            title=f"{packet_count} packets",
         )
+        # sum of emitted packets
+        nt.node_map[conversation.src]["packets"] += packet_count
 
-        # double node size for nodes that sent more packets than average
-        if packet_count > packet_average:
-            node_size = 50
-        else:
-            node_size = 25
-        logger.debug(
-            f"Source: {conversation.src} => set node size: {node_size}"
-        )
-        nt.node_map[conversation.src]["size"] = node_size
+    # resize nodes in second pass
+    for node in nt.nodes:
+
+        # compute packet ratio for node, based on emitted traffic
+        packet_percentage = node["packets"] / packet_counter
+
+        # set node size in proportion to emitted traffic, with a minimum size
+        node["size"] = max(NODE_MIN_SIZE, (NODE_MAX_SIZE * packet_percentage))
 
     # because PyVis will output a HTML page and additional directories in the current directory,
     # we explicitly switch to the temp directory
