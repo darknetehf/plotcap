@@ -11,7 +11,7 @@ authors = [
 maintainers = [
     {name = "Darknet ehf", email = "info@labs.darknet.com"}
 ]
-keywords = ["TLS", "caddy"]
+keywords = ["pcap", "network"]
 classifiers = [
     "Topic :: System :: Networking",
     "Topic :: System :: Networking :: Monitoring",
