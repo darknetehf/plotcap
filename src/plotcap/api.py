@@ -35,6 +35,7 @@ def parse_file(pcap_file: str, layer: int = 2) -> Counter:
                     previous_ts = ts
                 source = packet[ip_layer].src
                 destination = packet[ip_layer].dst
+                packet_length = packet.wirelen
                 # if source != previous_source:
                 #     logger.debug(f"Source != previous_source")
                 # previous_source = packet[ip_layer].src
@@ -42,7 +43,7 @@ def parse_file(pcap_file: str, layer: int = 2) -> Counter:
                 datetime_object = datetime.fromtimestamp(float(ts))
                 # logger.debug(f"Time: {ts} ({datetime_object}) - previous_ts: {previous_ts} - Diff: {time_diff} - Source: {source} -> destination: {destination}")
                 print(
-                    f"{packet_counter},{ts},{datetime_object},{previous_ts},{source},{destination},{time_diff}"
+                    f"{packet_counter},{packet_length},{ts},{datetime_object},{previous_ts},{source},{destination},{time_diff}"
                 )
                 previous_ts = ts
                 continue
