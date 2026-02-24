@@ -36,9 +36,7 @@ def plot_network(pcap_file: str, layer: int = 2, resolve_oui: bool = True):
         packet_average = packet_counter / len(nodes)
         logger.info(f"Average number of packets: {packet_average}")
     else:
-        logger.warning(
-            "No nodes found in capture file for the chosen layer => exit"
-        )
+        logger.warning("No nodes found in capture file for the chosen layer => exit")
         sys.exit(1)
 
     for node in nodes:
@@ -74,7 +72,6 @@ def plot_network(pcap_file: str, layer: int = 2, resolve_oui: bool = True):
 
     # resize nodes in second pass
     for node in nt.nodes:
-
         # compute packet ratio for node, based on emitted traffic
         packet_percentage = node["packets"] / packet_counter
 

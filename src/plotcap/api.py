@@ -26,8 +26,11 @@ def parse_file(pcap_file: str, layer: int = 2) -> Counter:
             bytes_read += packet.wirelen
             if ip_layer in packet:
                 logger.debug(
-                    f"Packet {packet_counter} - Source: {packet[ip_layer].src}, Destination: {
-                        packet[ip_layer].dst} - Frame length: {packet[ip_layer].wirelen}"
+                    f"Packet {packet_counter} - Source: {
+                        packet[ip_layer].src
+                    }, Destination: {packet[ip_layer].dst} - Frame length: {
+                        packet[ip_layer].wirelen
+                    }"
                 )
                 # count conversations as tuples! (trailing comma is required)
                 if (

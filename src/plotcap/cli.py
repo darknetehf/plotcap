@@ -4,9 +4,6 @@ import logging.config
 import logging.handlers
 import os
 import sys
-from pathlib import Path
-
-import yaml
 
 from plotcap import __version__
 from plotcap.plotting import plot_layer2, plot_layer3
@@ -113,13 +110,9 @@ def main():
         logger.info("Application starting")
 
         if args.layer == "l2":
-            plot_layer2(
-                pcap_file=args.capture_file, resolve_oui=args.resolve_oui
-            )
+            plot_layer2(pcap_file=args.capture_file, resolve_oui=args.resolve_oui)
         elif args.layer == "l3":
-            plot_layer3(
-                pcap_file=args.capture_file, resolve_oui=args.resolve_oui
-            )
+            plot_layer3(pcap_file=args.capture_file, resolve_oui=args.resolve_oui)
 
     except Exception as ex:
         exception_type = ex.__class__.__name__
